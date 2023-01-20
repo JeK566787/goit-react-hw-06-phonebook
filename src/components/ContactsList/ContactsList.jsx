@@ -19,6 +19,8 @@ export const ContactsList = () => {
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
+  console.log(typeof filter);
+  console.log(setFilteredContacts());
 
   return (
     <Ul>

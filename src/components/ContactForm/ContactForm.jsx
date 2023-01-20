@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 
 import { Label, Input, Btn } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,44 +12,63 @@ export const ContactForm = () => {
     return state.contacts.contacts;
   });
 
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
-  const inputChange = event => {
-    const { name, value } = event.currentTarget;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const onFormSubmit = event => {
-    event.preventDefault();
-    const repeatCheck = contacts.find(contact => {
-      return contact.name === name;
-    });
-    if (repeatCheck) {
+  const onFormSubmit = e => {
+    e.preventDefault();
+    const name = e.target.elements.name.value;
+    const number = e.target.elements.number.value;
+    const checkContact = contacts.find(contact => contact.name === name);
+    if (checkContact) {
       alert('Already in Contacts');
       return;
     }
-    dispatch(addContact({ name, number, id: nanoid() }));
-    setName('');
-    setNumber('');
+    const newContact = {
+      name: name,
+      number: number,
+      id: nanoid(),
+    };
+
+    dispatch(addContact(newContact));
+    e.target.reset();
   };
+
+  // const [name, setName] = useState('');
+  // const [number, setNumber] = useState('');
+
+  // const inputChange = event => {
+  //   const { name, value } = event.currentTarget;
+  //   switch (name) {
+  //     case 'name':
+  //       setName(value);
+  //       break;
+  //     case 'number':
+  //       setNumber(value);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
+
+  // const onFormSubmit = event => {
+  //   event.preventDefault();
+  //   const repeatCheck = contacts.find(contact => {
+  //     return contact.name === name;
+  //   });
+  //   if (repeatCheck) {
+  //     alert('Already in Contacts');
+  //     return;
+  //   }
+  //   dispatch(addContact({ name, number, id: nanoid() }));
+  //   setName('');
+  //   setNumber('');
+  // };
 
   return (
     <form onSubmit={onFormSubmit}>
       <Label>
         Name
         <Input
-          value={name}
-          onChange={inputChange}
+          // value={name}
+          // onChange={inputChange}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -60,8 +79,8 @@ export const ContactForm = () => {
       <Label>
         Number
         <Input
-          value={number}
-          onChange={inputChange}
+          // value={number}
+          // onChange={inputChange}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
