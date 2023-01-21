@@ -10,20 +10,6 @@ export const App = () => {
     return state.contacts.contacts;
   });
 
-  // const [contacts, setContacts] = useState(
-  //   JSON.parse(localStorage.getItem('contacts')) ?? []
-  // );
-
-  // const deleteContacts = id => {
-  //   setContacts(prevState => prevState.filter(el => el.id !== id));
-  // };
-
-  // const setFilteredContacts = () => {
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(filter.toLowerCase())
-  //   );
-  // };
-
   return (
     <Container>
       <h1>Phonebook</h1>

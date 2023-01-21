@@ -10,9 +10,9 @@ export const ContactsList = () => {
 
   const dispatch = useDispatch();
 
-  const remove = id => {
-    dispatch(deleteContact(id));
-  };
+  // const remove = id => {
+  //   dispatch(deleteContact(id));
+  // };
 
   const setFilteredContacts = () => {
     return contacts.filter(contact =>
@@ -27,7 +27,7 @@ export const ContactsList = () => {
       {setFilteredContacts().map(({ number, name, id }) => (
         <Li key={id}>
           {name}: {number}
-          <Btn type="button" onClick={() => remove(id)}>
+          <Btn type="button" onClick={() => dispatch(deleteContact(id))}>
             Delete
           </Btn>
         </Li>
